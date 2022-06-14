@@ -1,7 +1,7 @@
 const pool = require("../data/config")
 
 const getAll = () => {
-    const query = `SELECT * FROM mundial`
+    const query = `SELECT * FROM inmobiliaria`
     try{
         return pool.query(query)
     } catch (error) {
@@ -11,7 +11,7 @@ const getAll = () => {
 }
 
 const getUserById = async(id) => {
-    const query = `SELECT * FROM mundial WHERE id = ${id} LIMIT 1`
+    const query = `SELECT * FROM inmobiliaria WHERE id = ${id} LIMIT 1`
     try{
         return await pool.query(query)
     } catch (error) {
@@ -20,10 +20,10 @@ const getUserById = async(id) => {
     }
 }
 
-const registerTeam = async(team) => {
-    const query = `INSERT INTO mundial SET ?`
+const editByID = async(id, inmueble) => {
+    const query = `UPDATE inmobiliaria SET ? WHERE id = ${id}`
     try{
-        return await pool.query(query, team)
+        return await pool.query(query, inmueble)
     } catch (error) {
         return { "error": error.message }
     }
@@ -34,4 +34,4 @@ const registerTeam = async(team) => {
 
 
 
-module.exports = { getAll, getUserById, registerTeam}
+module.exports = { getAll, getUserById, editByID}
