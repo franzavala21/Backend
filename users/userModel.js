@@ -30,8 +30,19 @@ const editByID = async(id, inmueble) => {
 
 }
 
+const deleteByID = async(id) => {
+    const query = `DELETE FROM inmobiliaria WHERE id = ${id}`
+    try{
+        return pool.query(query)
+    } catch (error) {
+        return { "error": error.message }
+
+    }
+    
+}
 
 
 
 
-module.exports = { getAll, getUserById, editByID}
+
+module.exports = { getAll, getUserById, editByID, deleteByID}

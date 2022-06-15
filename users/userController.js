@@ -1,5 +1,5 @@
 const notNumber = require("../utils/notNumber")
-const { getAll, getUserById, registerTeam, editByID } = require("./userModel")
+const { getAll, getUserById, registerTeam, editByID, deleteByID } = require("./userModel")
 
 
 
@@ -28,11 +28,18 @@ const editOne = async(req, res, next) => {
 }
 
 
+const deleteId = async(req, res, next) => {
+    if (notNumber(req.params.id, res)) return;
+    const result = await deleteByID(Number(req.params.id));
+    console.log(result)
+    if(result instanceof Error) return next(result);
+    result.affectedRows ? res.status(200).end() : next()
+
+}
 
 
 
 
 
 
-
-module.exports = { listAll, listOne, editOne }
+module.exports = { listAll, listOne, editOne, deleteId }

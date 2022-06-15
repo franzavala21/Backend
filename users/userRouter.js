@@ -1,4 +1,4 @@
-const { listAll, listOne, register, editOne } = require("./userController")
+const { listAll, listOne, register, editOne, deleteId } = require("./userController")
 
 const router = require("express").Router()
 
@@ -8,6 +8,7 @@ router.get("/:id", listOne)
 
 router.patch("/:id", editOne )
 
+router.delete("/:id", deleteId)
 
 
 
