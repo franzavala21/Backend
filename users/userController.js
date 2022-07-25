@@ -1,6 +1,6 @@
 const notNumber = require("../utils/notNumber")
-const { getAll, getUserById, registerTeam, editByID, deleteByID } = require("./userModel")
-
+const { getAll, getUserById, editByID, deleteByID, registerUser } = require("./userModel")
+const { hashPass, checkPass} = require("../utils/handlePassword")
 
 
 
@@ -37,9 +37,15 @@ const deleteId = async(req, res, next) => {
 
 }
 
+const register = async(req, res, next) =>{
+    const password = hashPass(req.body.password)
+    const result = await registerUser({...req.body, password})
+    result instanceof Error ? next(result) : res.status(201).json(`User ${req.body.name} created`)
+}
 
 
 
 
 
-module.exports = { listAll, listOne, editOne, deleteId }
+
+module.exports = { listAll, listOne, editOne, deleteId, register }

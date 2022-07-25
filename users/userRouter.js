@@ -10,6 +10,8 @@ router.patch("/:id", editOne )
 
 router.delete("/:id", deleteId)
 
+router.post("/register", register)
+
 
 
 module.exports = router

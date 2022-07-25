@@ -41,8 +41,17 @@ const deleteByID = async(id) => {
     
 }
 
+const registerUser = async(user) => {
+    const query = `INSERT INTO inmobiliaria SET ?`
+    try{
+        return await pool.query(query, user)
+    } catch (error) {
+        return { "error": error.message }
+    }
+}
 
 
 
 
-module.exports = { getAll, getUserById, editByID, deleteByID}
+
+module.exports = { getAll, getUserById, editByID, deleteByID, registerUser}
